@@ -40,7 +40,7 @@ public Rubrica() {
 	
 		this.nome = nome;
 	}
-
+	
 	public long getId_Rubrica() {
 		return id_Rubrica;
 	}

@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import hibernateUtil.HibernateUtil;
 import model.Rubrica;
 import model.Voce;
@@ -106,8 +109,41 @@ public class VoceDao {
 		return v;
 
 	}
+	
+	// 4 - Read (con id_rubrica)
+		public Set<Voce> leggiTutteLeVoci(Rubrica r) {
+			Set<Voce> listaVoci=null;
+			
+			Session session = HibernateUtil.openSession();
+			Transaction tx = null;
 
-	// 4 - Update
+			try {
+
+				tx = session.getTransaction();
+
+				tx.begin();
+
+				Query query = session
+						.createQuery("from Voce where id_Rubrica=:idRubricaInserito");
+
+				query.setLong("idRubricaInserito", r.getId_Rubrica());
+				listaVoci=(Set<Voce>) query.list();
+				
+				tx.commit();
+
+			} catch (Exception ex) {
+
+				tx.rollback();
+
+			} finally {
+				session.close();
+			}
+
+			return listaVoci;
+
+		}
+
+	// 5 - Update
 	public boolean aggiornaVoce(Voce v) {
 		boolean res = false;
 
@@ -135,9 +171,9 @@ public class VoceDao {
 
 	}
 
-	// 4- Delete
+	// 6- Delete
 
-	public boolean eliminaRubrica(Voce v) {
+	public boolean eliminaVoce(Voce v) {
 		boolean res = false;
 
 		Session session = HibernateUtil.openSession();
