@@ -88,7 +88,7 @@ public class VoceDao {
 							+ "cognome=:cognomeInserito and"
 							+ "tel=:telefonoInserito");
 
-			query.setString("idRubricaInserito", r.getId_Rubrica());
+			query.setLong("idRubricaInserito", r.getId_Rubrica());
 			query.setString("nomeInserito", nome);
 			query.setString("cognomeInserito", cognome);
 			v = (Voce) query.uniqueResult();
