@@ -111,7 +111,9 @@ public class VoceDao {
 	}
 	
 	// 4 - Read (con id_rubrica)
-		public Set<Voce> leggiTutteLeVoci(Rubrica r) {
+	
+	@SuppressWarnings("unchecked")
+	public Set<Voce> leggiTutteLeVoci(Rubrica r) {
 			Set<Voce> listaVoci=null;
 			
 			Session session = HibernateUtil.openSession();
